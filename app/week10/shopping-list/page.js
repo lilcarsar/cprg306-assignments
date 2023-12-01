@@ -11,9 +11,9 @@ import { useUserAuth } from "../_utils/auth-context";
 
 
 export default function Page() {
+  const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState(null);
   const {user, gitHubSignIn, firebaseSignOut} = useUserAuth();
-  const [items, setItems] = useState([]);
 
   async function loadItems() {
     const itemsData = await getItems(user.uid);
@@ -55,6 +55,7 @@ export default function Page() {
 
           <NewItem onAddItem={handleAddItem} />
 
+          <ItemList items={items} onItemSelect={handleItemSelect} />
         </div>
 
         <MealIdeas ingredient={selectedItemName} />
